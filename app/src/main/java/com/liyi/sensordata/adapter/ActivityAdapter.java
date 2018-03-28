@@ -27,7 +27,6 @@ public class ActivityAdapter extends ArrayAdapter<Activity> {
         //int icons;
     public ActivityAdapter(Context context, List<Activity> objects) {
         super(context, 0, objects);
-
     }
 
     @Override
@@ -36,23 +35,19 @@ public class ActivityAdapter extends ArrayAdapter<Activity> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
         }
-        ImageView view = (ImageView) convertView.findViewById(R.id.icon);
-        view.setImageResource(R.drawable.foot);
 
         TextView text1 = (TextView) convertView.findViewById(R.id.text1);
-        text1.setText(currentActivity.getActivity_id() + "");
+        text1.setText(currentActivity.getTime());
         TextView text2 = (TextView) convertView.findViewById(R.id.text2);
-        text2.setText(currentActivity.getStart_time() + "");
+        text2.setText(currentActivity.getAir());
         TextView text3 = (TextView) convertView.findViewById(R.id.text3);
-        text3.setText(currentActivity.getEnd_time() + "");
+        text3.setText(currentActivity.getGround());
         TextView text4 = (TextView) convertView.findViewById(R.id.text4);
-        text4.setText(currentActivity.getDistance() + "");
+        text4.setText(currentActivity.getDistance());
         TextView text5 = (TextView) convertView.findViewById(R.id.text5);
-        text5.setText(currentActivity.getDate() + "");
+        text5.setText(currentActivity.getDate());
         TextView text6 = (TextView) convertView.findViewById(R.id.text6);
-        text6.setText(currentActivity.getPressure() + "");
-
-
+        text6.setText(currentActivity.getPressure());
 
         return convertView;
     }

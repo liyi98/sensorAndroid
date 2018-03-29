@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                                 String date = temp.getString("created_at");
                                 String pressure = temp.getString("average_pressure");
                                 mtext.setText(temp.getString("activity_id"));
-                                list.add(new Activity(activity_id,start_time,end_time,distance+" m",date,pressure));
+                                list.add(new Activity(activity_id,start_time,end_time,distance,date,pressure));
 
                             }
 

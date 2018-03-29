@@ -15,7 +15,7 @@ public class Activity {
     private String date;
     private String pressure;
 
-    public Activity(){}
+
     public Activity(String activity_id,String start_time,String end_time,String distance,String date,String pressure){
         this.activity_id = activity_id;
         this.start_time = start_time;

@@ -1,8 +1,7 @@
 package com.liyi.sensordata;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
+
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -16,7 +15,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.liyi.sensordata.adapter.ActivityAdapter;
-import com.liyi.sensordata.http.CustomRequest;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;

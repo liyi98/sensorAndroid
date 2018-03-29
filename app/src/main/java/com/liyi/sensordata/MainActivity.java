@@ -26,30 +26,18 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
-    private TextView mtext;
-    private ImageButton mButton;
     private ListView mlist;
-   private ArrayList<Activity> list;
+    private ArrayList<Activity> list;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mButton = (ImageButton) findViewById(R.id.imageButton3);
-        mTextMessage = (TextView) findViewById(R.id.textView5);
-        mtext = (TextView) findViewById(R.id.textView6);
-        mButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mTextMessage.setText("Hello Li Yi");
-            }
-        });
         mlist = (ListView) findViewById(R.id.listView);
         RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
         list = new ArrayList<Activity>();
-        String url = "http://khaibin.asuscomm.com/liyi.json";
+        String url = "http://khaibin.asuscomm.com/sensor/main.php?view=get_activity";
 
 
         JsonArrayRequest jsonRequest = new JsonArrayRequest
@@ -60,17 +48,20 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject temp = response.getJSONObject(i);
-                                String activity_id = temp.getString("activity_id");
-                                String start_time = temp.getString("start_time");
-                                String end_time = temp.getString("end_time");
+                                String start = temp.getString("start_time");
+                                String end = temp.getString("end_time");
+                                double time = Double.parseDouble(end) - Double.parseDouble(start);
+                                String air = temp.getString("average_time_on_air");
+                                String ground = temp.getString("average_time_on_ground");
                                 String distance = temp.getString("distance");
                                 String date = temp.getString("created_at");
                                 String pressure = temp.getString("average_pressure");
-                                mtext.setText(temp.getString("activity_id"));
-                                list.add(new Activity(activity_id,start_time,end_time,distance,date,pressure));
+
+                                list.add(new Activity("time: " +Double.toString(time) + "s","avg_on_air: "+ air, "avg_on_ground: " + ground,"distance: "+ distance +"km","date: "+ date,"pressure: "+ pressure+"Pa"));
 
                             }
-
+                            ActivityAdapter adapter = new ActivityAdapter(MainActivity.this, list);
+                            mlist.setAdapter(adapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -83,15 +74,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
         Volley.newRequestQueue(this).add(jsonRequest);
-        ActivityAdapter adapter = new ActivityAdapter(MainActivity.this, list);
-        mlist.setAdapter(adapter);
-
-
-
-
-
-
-
 
     }
 
